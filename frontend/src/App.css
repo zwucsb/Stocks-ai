@@ -1,38 +1,185 @@
-.App {
-    text-align: center;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
-.App-link {
-    color: #61dafb;
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Chart container */
+.chart-container {
+  position: relative;
+  height: 400px;
+  padding: 20px;
+}
+
+/* Stock card hover effects */
+.stock-card {
+  transition: all 0.3s ease;
+}
+
+.stock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Button hover effects */
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+/* Search input focus */
+.search-input {
+  @apply w-full px-4 py-3 pl-12 pr-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+/* Period selector */
+.period-btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105;
+}
+
+.period-btn.active {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg;
+}
+
+.period-btn.inactive {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Quote cards */
+.quote-card {
+  @apply bg-white rounded-xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-all duration-300;
+}
+
+.quote-card:hover {
+  transform: translateY(-1px);
+}
+
+/* Price change colors */
+.price-positive {
+  @apply text-green-600 bg-green-50 px-2 py-1 rounded-md font-medium;
+}
+
+.price-negative {
+  @apply text-red-600 bg-red-50 px-2 py-1 rounded-md font-medium;
+}
+
+/* Chart legend */
+.chart-legend {
+  @apply flex flex-wrap gap-4 justify-center mt-4;
+}
+
+.legend-item {
+  @apply flex items-center space-x-2;
+}
+
+.legend-color {
+  @apply w-4 h-4 rounded-sm;
+}
+
+/* Empty state */
+.empty-state {
+  @apply text-center py-12;
+}
+
+.empty-state-icon {
+  @apply mx-auto h-16 w-16 text-gray-400 mb-6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px;
+    padding: 10px;
+  }
+  
+  .period-btn {
+    @apply px-3 py-1 text-sm;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    @apply bg-gray-900 text-white;
+  }
+  
+  .dark-mode .quote-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .dark-mode .search-input {
+    @apply bg-gray-800 border-gray-700 text-white;
+  }
 }
